@@ -50,15 +50,13 @@ while [[ $# -gt 0 ]]; do
 done
 
 refetch_ksu() {
-
-    rm -rf "$PATCH_DIR"
-
-        echo "Fetching latest KernelSU Next"
-        git submodule update --init --recursive || {
-            echo "Failed to initialize KernelSU-Next submodule!"
-            exit 1
-        }
+    echo "Updating KernelSU submodule..."
+    git submodule update --remote --merge KernelSU-Next || {
+        echo "Failed to update KernelSU submodule!"
+        exit 1
+    }
 }
+
 
 apply_ksu_susfs_patch() {
 
